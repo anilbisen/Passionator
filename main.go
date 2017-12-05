@@ -22,8 +22,10 @@ func main() {
 	// Set-up routes
 	mux := goji.NewMux()
 	gc := NewGreetingController(MongoSessionWrapper{GetSession()})
+	pc := NewProfileController(MongoSessionWrapper{GetSession()})
 	//gc := NewGreetingController(GetSession())
 	gc.AddHandlers(mux)
+        pc.AddHandlers(mux)
 	mux.Handle(pat.Get("/html/*"), http.FileServer(http.Dir("./")))
 	MainLogger.Printf("System is ready.\n")
 	http.ListenAndServe("0.0.0.0:8000", mux)
