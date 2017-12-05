@@ -69,7 +69,7 @@ There is also a `docker-compose` file so you can run the service in Docker. We a
 
 To just run a local MongoDB
 ```
-$ docker network create passionatorgolang_default
+$ docker network create passionator_default
 $ docker-compose create passionatordb
 $ docker-compose start passionatordb
 ```
