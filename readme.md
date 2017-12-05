@@ -1,7 +1,7 @@
-# Starter for Golang #
+# passionator for Golang #
 A simple stateless REST service in Golang. Build in Drone.
 
-[![Build Status](http://164.177.187.96:18000/api/badges/okoeth/starter-golang/status.svg)](http://164.177.187.96:18000/okoeth/starter-golang)
+[![Build Status](http://164.177.187.96:18000/api/badges/okoeth/passionator-golang/status.svg)](http://164.177.187.96:18000/okoeth/passionator-golang)
 
 ## Set-up ##
 
@@ -69,26 +69,26 @@ There is also a `docker-compose` file so you can run the service in Docker. We a
 
 To just run a local MongoDB
 ```
-$ docker network create startergolang_default
-$ docker-compose create starterdb
-$ docker-compose start starterdb
+$ docker network create passionatorgolang_default
+$ docker-compose create passionatordb
+$ docker-compose start passionatordb
 ```
 
 
 Build container:
 ```
-$ docker-compose build starter
+$ docker-compose build passionator
 ```
 
 Now create and start the container:
 ```
-$ docker-compose create starter
-$ docker-compose start starter
+$ docker-compose create passionator
+$ docker-compose start passionator
 ```
 
 Logs are avil from:
 ```
-$ docker-compose logs starter
+$ docker-compose logs passionator
 ```
 
 The services can be accessed using the same URLs as when run locally
@@ -100,10 +100,10 @@ $ docker-compose up
 
 To clean up:
 ```
-$ docker-compose stop starter
-$ docker-compose rm starter
-$ docker-compose stop starterdb
-$ docker-compose rm starterdb
+$ docker-compose stop passionator
+$ docker-compose rm passionator
+$ docker-compose stop passionatordb
+$ docker-compose rm passionatordb
 ```
 
 ### Run in Altemista Cloud ###
@@ -116,39 +116,39 @@ $ oc login <cluster>.altemista.cloud:8443 -u "<username>" -p "<password>"
 
 Create a new project (with a unique name):
 ```
-$ oc new-project starter-<your_team_name>
+$ oc new-project passionator-<your_team_name>
 ```
 
 Create build credentials so that OpenShift can access Git. Make sure you provide your Git credentials, not the OpenShift credentials. 
 ```
-./createBuildsecret.sh starter-<your_team_name> <git-user> <git-password>
+./createBuildsecret.sh passionator-<your_team_name> <git-user> <git-password>
 ```
 
 To add persistence on OpenStack based environments run:
 ```
-./createGluster.sh starter-<your_team_name>
-./createAppdb.sh starter-<your_team_name> starter gluster test
+./createGluster.sh passionator-<your_team_name>
+./createAppdb.sh passionator-<your_team_name> passionator gluster test
 ```
 
 Alternatively, to add persistence on AWS based environments run:
 ```
-./createAppdb.sh starter-<your_team_name> starter aws test
+./createAppdb.sh passionator-<your_team_name> passionator aws test
 ```
 
 Finally run to create a test environment for the master branch:
 ```
-./createApp.sh starter-<your_team_name> starter https://github.com/Altemista/starter-golang.git test
+./createApp.sh passionator-<your_team_name> passionator https://github.com/Altemista/passionator-golang.git test
 ```
 
 And here we go:
 ```
-curl -k https://starter-test-starter-<your_team_name>.<cluster>.altemista.cloud/html/
+curl -k https://passionator-test-passionator-<your_team_name>.<cluster>.altemista.cloud/html/
 ```
 
 ## Automate build ##
 The builds will be automated by adding a web hook to GitLab.
 
-1. Navigate in OpenShift console to Builds / Starter-Test / Configuration and copy the generic web hook URL.
+1. Navigate in OpenShift console to Builds / passionator-Test / Configuration and copy the generic web hook URL.
 2. Navigate in GitHub to your Project / Settings / Integrations and past the URL in the URL field. Leve secret empty, *uncheck SSL verification* and click "Add webhook".
 
 Click the "Test" button behind the newly created web hook and check that a new build in OpenShift was triggered.

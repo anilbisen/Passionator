@@ -81,5 +81,5 @@ services:
     environment:
      - MONGODB_USER=user
      - MONGODB_PASSWORD=password
-     - MONGODB_DATABASE=starterdb
+     - MONGODB_DATABASE=passionatordb
      - MONGODB_ADMIN_PASSWORD=admin_password

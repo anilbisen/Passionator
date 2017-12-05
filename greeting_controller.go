@@ -46,7 +46,7 @@ func (gc *GreetingController) CreateGreeting(w http.ResponseWriter, r *http.Requ
 	gm.CreatedBy = "gopher"
 	gm.UpdatedAt = gm.CreatedAt
 	gm.UpdatedBy = gm.CreatedBy
-	gc.Session.DB("starterdb").C("greetings").Insert(gm)
+	gc.Session.DB("passionatordb").C("greetings").Insert(gm)
 	gmj, err := json.Marshal(gm)
 	if err != nil {
 		MainLogger.Println("Error marshaling into JSON")
@@ -60,7 +60,7 @@ func (gc *GreetingController) CreateGreeting(w http.ResponseWriter, r *http.Requ
 // GetGreetings retrieves all greetings
 func (gc *GreetingController) GetGreetings(w http.ResponseWriter, r *http.Request) {
 	var gms []GreetingModel
-	err := gc.Session.DB("starterdb").C("greetings").Find(ExtractQuery(r)).All(&gms)
+	err := gc.Session.DB("passionatordb").C("greetings").Find(ExtractQuery(r)).All(&gms)
 	if err != nil {
 		MainLogger.Println("Error reading from db")
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -85,7 +85,7 @@ func (gc *GreetingController) GetGreeting(w http.ResponseWriter, r *http.Request
 	}
 	idh := bson.ObjectIdHex(id)
 	gm := GreetingModel{}
-	err := gc.Session.DB("starterdb").C("greetings").FindId(idh).One(&gm)
+	err := gc.Session.DB("passionatordb").C("greetings").FindId(idh).One(&gm)
 	if err != nil {
 		MainLogger.Println("Unknown id")
 		w.WriteHeader(http.StatusNotFound)
@@ -112,7 +112,7 @@ func (gc *GreetingController) UpdateGreeting(w http.ResponseWriter, r *http.Requ
 	}
 	idh := bson.ObjectIdHex(id)
 	gmdb := GreetingModel{}
-	err := gc.Session.DB("starterdb").C("greetings").FindId(idh).One(&gmdb)
+	err := gc.Session.DB("passionatordb").C("greetings").FindId(idh).One(&gmdb)
 	if err != nil {
 		MainLogger.Println("Unknown id")
 		w.WriteHeader(http.StatusNotFound)
@@ -128,7 +128,7 @@ func (gc *GreetingController) UpdateGreeting(w http.ResponseWriter, r *http.Requ
 	gmdb.UpdatedAt = time.Now()
 	gmdb.UpdatedBy = "gopher"
 	gmdb.Clone(gmreq)
-	err = gc.Session.DB("starterdb").C("greetings").UpdateId(idh, gmdb)
+	err = gc.Session.DB("passionatordb").C("greetings").UpdateId(idh, gmdb)
 	if err != nil {
 		MainLogger.Printf("Error updating database: %v\n", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -146,7 +146,7 @@ func (gc *GreetingController) DeleteGreeting(w http.ResponseWriter, r *http.Requ
 		return
 	}
 	idh := bson.ObjectIdHex(id)
-	err := gc.Session.DB("starterdb").C("greetings").RemoveId(idh)
+	err := gc.Session.DB("passionatordb").C("greetings").RemoveId(idh)
 	if err != nil {
 		MainLogger.Println("Unknown id")
 		w.WriteHeader(http.StatusNotFound)

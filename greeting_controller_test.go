@@ -27,7 +27,7 @@ func mock(t *testing.T, mockFunction func(t *testing.T)) *gomock.Controller {
 	database = NewMockDatabaseWrapper(mc)
 	collection = NewMockCollectionWrapper(mc)
 	query = NewMockQueryWrapper(mc)
-	session.EXPECT().DB("starterdb").Return(database).AnyTimes()
+	session.EXPECT().DB("passionatordb").Return(database).AnyTimes()
 	database.EXPECT().C("greetings").Return(collection).AnyTimes()
 	testGreetingController.Session = session
 	mockFunction(t)

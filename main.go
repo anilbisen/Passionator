@@ -12,7 +12,7 @@ import (
 )
 
 // MainLogger is the logger for the app
-var MainLogger = log.New(os.Stdout, "STARTER: ", log.Lshortfile|log.LstdFlags)
+var MainLogger = log.New(os.Stdout, "PASSIONATOR: ", log.Lshortfile|log.LstdFlags)
 
 func init() {
 	flag.Parse()
@@ -37,7 +37,7 @@ func GetSession() *mgo.Session {
 		return nil
 	}
 	MainLogger.Printf("Connecting to mongo on %s.\n", host)
-	s, err := mgo.Dial("mongodb://user:password@" + host + ":27017/starterdb")
+	s, err := mgo.Dial("mongodb://user:password@" + host + ":27017/passionatordb")
 	if err != nil {
 		MainLogger.Panicf("Cannot connect to MongoDB on host %s: %s\n", host, err)
 		return nil

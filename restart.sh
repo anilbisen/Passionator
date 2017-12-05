@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ x = x$1 ]; then
     echo "Usage: ./restart.sh <service>"
-    echo "    <service>  : The service, e.g. starter"
+    echo "    <service>  : The service, e.g. passionator"
   exit
 fi
 SERVICE=$1
